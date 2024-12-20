@@ -107,7 +107,6 @@ public class Runigram {
 				flippedVertically[rows][column] = c;
 				rows --;
 			}
-		
 		return flippedVertically;
 	}
 	// Computes the luminance of the RGB values of the given pixel, using the formula 
@@ -139,17 +138,18 @@ public class Runigram {
 	 * The image is scaled (resized) to have the given width and height.
 	 */
 	public static Color[][] scaled(Color[][] image, int width, int height) {
-		int h0 = image.length;
-		int w0= image[0].length;
+		double h0 = image.length;
+		double w0= image[0].length;
 		double scaleX = h0 / height;
 		double scaleY= w0 / width;
 		Color[][] scaled = new Color[height][width];
 		for(int i=0; i<image.length; i++){
 			for(int j=0; j< image[0].length; j++){
-				//scaled[i][j] = scaleX
+				int index = (int)(i * scaleX);
+				int index2 = (int)(j * scaleY);
+				scaled[i][j] = image[index][index2];
 			}
 		}
-
 		return scaled;
 	}
 	
