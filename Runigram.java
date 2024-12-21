@@ -170,6 +170,26 @@ private static Color luminance(Color pixel) {
 	 * The image is scaled (resized) to have the given width and height.
 	 */
 	public static Color[][] scaled(Color[][] image, int width, int height) {
+		int h0 = image.length;       
+		int w0 = image[0].length;    
+		double scaleY = (double) h0 / height;  
+		double scaleX = (double) w0 / width;  
+	
+		Color[][] scaledImage = new Color[height][width];
+	
+		for (int i = 0; i < height; i++) {         
+			for (int j = 0; j < width; j++) {      
+				int originalY = Math.min((int) (i * scaleY), h0 - 1); 
+				int originalX = Math.min((int) (j * scaleX), w0 - 1); 
+				scaledImage[i][j] = image[originalY][originalX];      
+			}
+		}
+	
+		return scaledImage; 
+	}
+	
+
+	public static Color[][] scaled1(Color[][] image, int width, int height) {
 		double h0 = image.length;
 		double w0= image[0].length;
 		double scaleX = h0 / height;
