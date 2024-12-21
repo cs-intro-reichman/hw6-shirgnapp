@@ -196,7 +196,21 @@ public class Runigram {
 	 * of the source image.
 	 */
 	public static void morph(Color[][] source, Color[][] target, int n) {
-		//// Replace this comment with your code
+		Runigram.setCanvas(source);
+			Runigram.display(source);
+			StdDraw.pause(3000); 
+		if (source[0].length != target[0].length || source.length != target.length) {
+			scaled(source, target[0].length, target.length);
+		}
+		double limit = 1;
+		double fraction = limit / n; 
+		while (fraction < 1) {	
+			Runigram.setCanvas(blend(source, target, fraction));
+			Runigram.display(blend(source, target, fraction));
+			StdDraw.pause(3000); 
+			limit++;
+			fraction = limit / n; 
+		}
 	}
 	
 	/** Creates a canvas for the given image. */
