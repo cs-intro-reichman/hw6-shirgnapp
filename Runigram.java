@@ -112,7 +112,20 @@ public class Runigram {
 	// Computes the luminance of the RGB values of the given pixel, using the formula 
 	// lum = 0.299 * r + 0.587 * g + 0.114 * b, and returns a Color object consisting
 	// the three values r = lum, g = lum, b = lum.
-	private static Color luminance(Color pixel) {
+	/**
+ * Computes the luminance of the RGB values of the given pixel.
+ * The formula used is: lum = 0.299 * red + 0.587 * green + 0.114 * blue.
+ * The result is returned as a Color object where all RGB values are set to the luminance.
+ * 
+ * @param pixel The input Color object.
+ * @return A new Color object in grayscale based on the luminance value.
+ */
+private static Color luminance(Color pixel) {
+    int lum = (int) (pixel.getRed() * 0.299 + pixel.getGreen() * 0.587 + pixel.getBlue() * 0.114);
+    return new Color(lum, lum, lum);
+}
+
+	private static Color luminance1(Color pixel) {
 		int r = (int)(pixel.getRed() * 0.299);
 		int b = (int)(pixel.getBlue() * 0.114);
 		int g = (int)(pixel.getGreen()*0.587);
@@ -123,7 +136,24 @@ public class Runigram {
 	/**
 	 * Returns an image which is the grayscaled version of the given image.
 	 */
-	public static Color[][] grayScaled(Color[][] image) {
+
+	 public static Color[][] grayScaled(Color[][] image) {
+		
+		Color[][] grayScaled = new Color[image.length][image[0].length];
+		for (int i = 0; i < image.length; i++) {
+			for (int j = 0; j < image[0].length; j++) {
+				if (image[i][j] != null) {
+					grayScaled[i][j] = luminance(image[i][j]);
+				} else {
+					grayScaled[i][j] = new Color(0, 0, 0);
+				}
+			}
+		}
+	
+		return grayScaled;
+	}
+	
+	public static Color[][] grayScaled1(Color[][] image) {
 		Color[][] grayScaled = new Color[image.length][image[0].length];
 		for(int i=0; i<image.length; i++){
 			for(int j=0; j<image[0].length; j++){
